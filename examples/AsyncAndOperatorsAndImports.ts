@@ -1,4 +1,7 @@
-import {Observable} from 'rxjs';
+// import just what we need
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 let numbers = [1 ,5, 10, 15]
 let source = Observable.create(observer => {
@@ -8,7 +11,7 @@ let source = Observable.create(observer => {
         observer.next(numbers[index++]);
 
         if(index < numbers.length){
-            setTimeout(produceValue, 500);
+            setTimeout(produceValue, 500); // async, delaying 0.5 a second
         }
         else{
             observer.complete();
@@ -17,7 +20,7 @@ let source = Observable.create(observer => {
 
     produceValue();
 
-}).map(n => n * 2)
+}).map(n => n * 2) // using RxJs Operators
     .filter(n => n <= 10);
 
 
