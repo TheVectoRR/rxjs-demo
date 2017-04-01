@@ -28,7 +28,7 @@ source.subscribe(new MyObserver());
 // (2) an easier Observer
 
 source.subscribe(
-  value => console.log(`value: ${value}`),
+    value => console.log(`value: ${value}`),
     e => console.log(`error: ${e}`),
     () => console.log('complete')
 );
