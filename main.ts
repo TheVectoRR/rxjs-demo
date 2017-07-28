@@ -1,27 +1,43 @@
 import {Observable} from 'rxjs';
 
 
-let circle = document.getElementById("circle");
-let source = Observable.fromEvent(document, "mousemove")
-    .map((e:MouseEvent)=>{
-        return{
-            x:e.clientX,
-            y:e.clientY
-        }
-    })
-    .filter(
-        value => value.x < 500
-    )
-    .delay(500);
+let output = document.getElementById("output");
+let button = document.getElementById("button");
 
-function onNext(value){
-    circle.style.left = value.x + 'px';
-    circle.style.top = value.y + 'px';
+let click = Observable.fromEvent(button, "click");
+
+function load(url: string) {
+    return Observable.create(observer => {
+        let xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("load", () => {
+            let data = JSON.parse(xhr.responseText);
+            observer.next(data);
+            observer.complete();
+        });
+
+        xhr.open("GET", url);
+        xhr.send();
+    });
 }
 
-source.subscribe(
-    onNext,
-    e => console.log(`error: ${e}`),
-    () => console.log('complete')
-);
+function renderMovies(movies){
+    movies.forEach(m => {
+        let div = document.createElement("div");
+        div.innerText = m.title;
+        output.appendChild(div);
+    });
+}
+
+/**
+ * flatMap subscribe for us to the next observable.
+ * click event observable fires a http request observable, with flatMap we need to subscribe only once and the chained
+ * observable will fire for us as well.
+ */
+click.flatMap(e => load("movies.json"))
+    .subscribe(
+        renderMovies,
+        e => console.log(`error: ${e}`),
+        () => console.log('complete')
+    );
 
