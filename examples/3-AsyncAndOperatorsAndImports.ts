@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 
-let numbers = [1 ,5, 10, 15]
+let numbers = [1 ,5, 10, 15];
 let source = Observable.create(observer => {
 
     let index = 0;
@@ -16,7 +16,7 @@ let source = Observable.create(observer => {
         else{
             observer.complete();
         }
-    }
+    };
 
     produceValue();
 

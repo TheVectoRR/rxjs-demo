@@ -1,6 +1,6 @@
-import {Observable, Observer} from 'rxjs';
+import {Observable} from 'rxjs';
 
-let numbers = [1 ,5, 10, 15]
+let numbers = [1 ,5, 10, 15];
 let source = Observable.create(observer => {
 
     for(let n of numbers){

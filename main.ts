@@ -13,7 +13,7 @@ let source = Observable.create(observer => {
         else{
             observer.complete();
         }
-    }
+    };
 
     produceValue();
 

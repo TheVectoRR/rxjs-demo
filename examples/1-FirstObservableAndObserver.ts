@@ -4,7 +4,7 @@ import {Observable, Observer} from 'rxjs';
  * The next 2 subscribed observers are having the excact same logic.
  */
 
-let numbers = [1 ,5, 10]
+let numbers = [1 ,5, 10];
 let source = Observable.from(numbers);
 
 // (1) Implementing an own written Observer
