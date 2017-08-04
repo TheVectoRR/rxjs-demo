@@ -51,7 +51,7 @@ function renderMovies(movies) {
  * click event observable fires a http request observable, with flatMap we need to subscribe only once and the chained
  * observable will fire for us as well.
  */
-click.flatMap(e => load("movies.json"))
+click.flatMap(e => load("movies2.json"))
     .subscribe(
         renderMovies,
         e => console.log(`error: ${e}`),
